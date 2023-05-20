@@ -57,7 +57,7 @@
     
         data = new Date()
         tempo_final = data.getTime()
-        if(tempo_final - tempo_inicial > 1000)
+        if(tempo_final - tempo_inicial > 500)
         {
             tempo_inicial = tempo_final
     
@@ -78,14 +78,14 @@
         temporizador = setTimeout(Subir,1000)
     
         x = 750
-        y = 100
+        y = 500
         TOPO = ""
         ESQUERDA = ""
     
         function Subir()
         {
             TOPO = y + "px"
-            $("#foguete").animate({top:TOPO},1000)
+            $("#foguete").animate({top:TOPO},700)
             temporizador = null
             temporizador = setInterval(Descer,1000)
         }
@@ -94,14 +94,34 @@
         {
             y = y + 20
     
-            if(y>690)
+            if(y>920)
             {
-                y=690
+                y=935
             }
             TOPO = y + "px"
             ESQUERDA = x + "px"
-            $("#foguete").animate({left:ESQUERDA,top:TOPO},1000)
+            $("#foguete").animate({left:ESQUERDA,top:TOPO},500)
         }
+
+        const tempoSubida = 100;
+
+        function reproduzirSom() {
+        const audio = new Audio('contagem_regressiva.mp3');
+        audio.play();
+        }
+
+            setTimeout(reproduzirSom, tempoSubida);
+            console.log("Som reproduzindo")
+
+
+        const tempoDescida = 1000;
+
+        function reproduzirSom() {
+        const audio = new Audio('lancamento_foguete.mp3');
+        audio.play();
+        }
+
+        setTimeout(reproduzirSom, tempoDescida);
     </script>
 
     
