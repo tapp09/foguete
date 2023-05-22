@@ -1,129 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foguete</title>
-    <style>
-        body{
-
-            width: 100%;
-            height: 150vh;
-            background-image: linear-gradient(0deg,black,darkblue);
-            overflow: hidden;
-            
-
-        }
-        .foguete
-        {
-            position: absolute;
-            top: 900px;
-            left: 700px;
-
-        }
-
-        .lua {
-
-            position: absolute;
-            top: 960px;
-            left: 650px;
-            margin-top: 10px;
-        }
-
-    </style>
+    <title>Foguete do Musk</title>
 </head>
+<style>
+body
+    {
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(0deg, lightblue, darkblue);
+        overflow: hidden;
+    }
+    .foguete
+    {
+        position: absolute;
+        top: 600px;
+        left: 750px;
+    }
+    .lua
+    {
+        position: fixed;
+        top: 620px;
+        left: 445px;
+        width: 700px;
+        z-index: -1;
+    }
+</style>
 <body>
- <img id="foguete" src="foguete.gif" width="80px" class="foguete">
- <img src="full-moon-cartoon-icon-png.png" width="200px" class="lua">
+    
+    <img src="foguete.gif" width="80px" id="foguete" class="foguete">
+    <img src="lua.png" class="lua">
+    
+    <audio id="audio">
+        <source src="contagem_regressiva.mp3" type="audio/mp3">
+    </audio>
+    <audio id="audio2">
+        <source src="lancamento_foguete.mp3" type="audio/mp3">
+    </audio>
+    <audio id="audio3">
+        <source src="carina-stars-Aug-3.wav" type="audio/wav">
+    </audio>
 </body>
-
-<script src="jquery-3.7.0.min.js"> </script>
-
+<script src="jquery-3.7.0.min.js"></script>  
 <script>
+    var audio = new Audio();
+    audio.src = 'contagem_regressiva.mp3';
+    var audio2 = new Audio();
+    audio2.src = 'lancamento_foguete.mp3';
+    var audio3 = new Audio('we-have-a-problem.mp3');
+    audio2.src = 'carina-stars-Aug-3.wav';
+    function playAudio() 
+    {
+        audio.play();
+    }
+    setTimeout(playAudio, 500)
 
+    function playAudio2() 
+    {
+        audio2.play();
+    }
+    setTimeout(playAudio2, 15000)
+
+    function pausarAudio()
+    {
+        audio.pause()
+    }
+    setTimeout(pausarAudio, 15000)
+
+    function pausarAudio2()
+    {
+        audio2.pause()
+    }
+    setTimeout(pausarAudio2, 20000)
+    function playAudio3() 
+    {
+        audio3.play();
+    }
+    setTimeout(playAudio3, 20000)
+    function pausarAudio3()
+    {
+        audio2.pause()
+    }
+    setTimeout(pausarAudio3, 25000)
+data = new Date()
+tempo_inicial = data.getTime()
+
+document.onkeydown = Pega_Tecla;
+function Pega_Tecla(e) 
+{   
+    e = e || window.event;
+
+    tecla = e.keyCode;
+    console.log(tecla); // MOSTRA O CÓDIGO DA TECLA PRESSIONADA
+    
     data = new Date()
-    tempo_inicial = data.getTime()
+    tempo_final = data.getTime()
     
-    
-    document.onkeydown = Pega_Tecla;
-    
-    function Pega_Tecla(e) 
-    {   
-        e = e || window.event;
-    
-        tecla = e.keyCode;
-        console.log(tecla); 
-    
-        data = new Date()
-        tempo_final = data.getTime()
-        if(tempo_final - tempo_inicial > 500)
+    if(tempo_final-tempo_inicial > 1000)
+    {
+        tempo_inicial = tempo_final
+        if (tecla==37)
         {
-            tempo_inicial = tempo_final
-    
-        
-    
-            if(tecla == 37)
-            {
             x = x - 20
-            }
-            if(tecla == 39)
-            {
+        }
+        if (tecla==39)
+        {
             x = x + 20
-            }
         }
     }
-    
-    
-        temporizador = setTimeout(Subir,1000)
-    
-        x = 750
-        y = 500
-        TOPO = ""
-        ESQUERDA = ""
-    
-        function Subir()
+}
+x = 750
+y = 50
+TOPO = ""
+ESQUERDA = ""
+temporizador2 = setTimeout(Subir, 10000)
+function Subir()
+    {
+        TOPO = y + "px"
+        $("#foguete").animate({top:TOPO}, 1000)
+        temporizador2 = null
+        temporizador2 = setInterval( Descer, 1000)
+
+    }
+function Descer()
+    {
+        y = y + 40
+
+        TOPO = y + "px"
+        ESQUERDA = x + "px"
+        $("#foguete").animate({left:ESQUERDA, top:TOPO}, 1000)
+        
+        if (y > 580)
         {
-            TOPO = y + "px"
-            $("#foguete").animate({top:TOPO},700)
-            temporizador = null
-            temporizador = setInterval(Descer,1000)
+            y = 580
         }
-    
-        function Descer()
-        {
-            y = y + 20
-    
-            if(y>920)
-            {
-                y=935
-            }
-            TOPO = y + "px"
-            ESQUERDA = x + "px"
-            $("#foguete").animate({left:ESQUERDA,top:TOPO},500)
-        }
+    }
 
-        const tempoSubida = 100;
-
-        function reproduzirSom() {
-        const audio = new Audio('/contagem_regressiva.mp3');
-        audio.play();
-        }
-
-            setTimeout(reproduzirSom, tempoSubida);
-            console.log("Som reproduzindo")
-
-
-        const tempoDescida = 1000;
-
-        function reproduzirSom() {
-        const audio = new Audio('/lancamento_foguete.mp3');
-        audio.play();
-        }
-
-        setTimeout(reproduzirSom, tempoDescida);
-    </script>
-
-    
-
+</script>  
 </html>
