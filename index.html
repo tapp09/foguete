@@ -32,16 +32,13 @@ body
 <body>
     
     <img src="foguete.gif" width="80px" id="foguete" class="foguete">
-    <img src="lua.png" class="lua">
+    <img src="full-moon-cartoon-icon-png.png" class="lua">
     
     <audio id="audio">
         <source src="contagem_regressiva.mp3" type="audio/mp3">
     </audio>
     <audio id="audio2">
         <source src="lancamento_foguete.mp3" type="audio/mp3">
-    </audio>
-    <audio id="audio3">
-        <source src="carina-stars-Aug-3.wav" type="audio/wav">
     </audio>
 </body>
 <script src="jquery-3.7.0.min.js"></script>  
@@ -50,8 +47,6 @@ body
     audio.src = 'contagem_regressiva.mp3';
     var audio2 = new Audio();
     audio2.src = 'lancamento_foguete.mp3';
-    var audio3 = new Audio('we-have-a-problem.mp3');
-    audio2.src = 'carina-stars-Aug-3.wav';
     function playAudio() 
     {
         audio.play();
@@ -75,16 +70,7 @@ body
         audio2.pause()
     }
     setTimeout(pausarAudio2, 20000)
-    function playAudio3() 
-    {
-        audio3.play();
-    }
-    setTimeout(playAudio3, 20000)
-    function pausarAudio3()
-    {
-        audio2.pause()
-    }
-    setTimeout(pausarAudio3, 25000)
+
 data = new Date()
 tempo_inicial = data.getTime()
 
